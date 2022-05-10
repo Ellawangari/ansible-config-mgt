@@ -11,17 +11,17 @@
         state: latest
 
 - name: update LB server
-  hosts: lb,db
+  hosts: lb,dbgit 
   remote_user: ubuntu
   become: yes
   become_user: root
   gather_facts: False
   tasks:
-    - name: Update apt repo
-      apt: 
+    # - name: Update apt repo
+    #   apt: 
         
-        update_cache: yes
-        cache_valid_time: 3600
+    #     update_cache: yes
+    #     cache_valid_time: 3600
 
     - name: ensure wireshark is at the latest version
       apt:
