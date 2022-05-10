@@ -3,6 +3,7 @@
   remote_user: ec2-user
   become: yes
   become_user: root
+  gather_facts: False
   tasks:
     - name: ensure wireshark is at the latest version
       yum:
@@ -14,6 +15,7 @@
   remote_user: ubuntu
   become: yes
   become_user: root
+  gather_facts: False
   tasks:
     - name: Update apt repo
       apt: 
