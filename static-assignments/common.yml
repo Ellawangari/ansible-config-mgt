@@ -1,0 +1,48 @@
+- name: update web, nfs servers
+  hosts: webservers, nfs
+  remote_user: ec2-user
+  become: yes
+  become_user: root
+  gather_facts: False
+  tasks:
+    - name: ensure wireshark is at the latest version
+      yum:
+        name: wireshark
+        state: latest
+
+- name: update LB server
+  hosts: lb,db 
+  remote_user: ubuntu
+  become: yes
+  become_user: root
+  gather_facts: False
+  tasks:
+    - name: Update apt repo
+      apt: 
+        
+        update_cache: no     
+
+    - name: ensure wireshark is at the latest version
+      apt:
+        name: wireshark
+        state: latest
+
+- name: Create directory, file  and add a line to it on all servers
+  hosts: nfs,webservers,db,lb
+  become: yes
+  tasks: 
+     - name: Create a directory
+       file: 
+         path: /home/sample
+         state: directory
+
+     - name: Create a file
+       file: 
+         path: /home/sample/ansible.txt
+         state: touch
+
+     - name: Add a line to the file
+       lineinfile:
+          path: /home/sample/ansible.txt
+          line: Ansible is awesome! 
+        
