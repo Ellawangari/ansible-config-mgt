@@ -66,5 +66,5 @@ enable_apache_lb: false
 load_balancer_is_required: false
 
 loadbalancer_name: "myapp1"
-web1: "172.31.30.24"
-web2: "172.31.22.37"
+web1: "172.31.30.24 weight=3"
+web2: "172.31.22.37 weight=3"
