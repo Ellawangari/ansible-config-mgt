@@ -7,5 +7,10 @@
     tags:
       - always
 
-- hosts: uat-webservers
-- import_playbook: ../static-assignments/uat-webservers.yaml
+- name: import database file
+  import_playbook: ../static-assignments/db.yaml
+
+- hosts: lb
+- name: Loadbalancers assignment
+    import_playbook: ../static-assignments/loadbalancers.yaml
+    when: load_balancer_is_required
