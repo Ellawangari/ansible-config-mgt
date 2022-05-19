@@ -41,6 +41,7 @@
     - { name: web2, ip: 172.31.22.37 }
 
 
+
 # Nginx setup.
 - name: Copy nginx configuration in place.
   become: true

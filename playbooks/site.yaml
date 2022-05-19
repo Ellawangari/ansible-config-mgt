@@ -7,8 +7,8 @@
   tags:
       - always
 
-- name: import database file
-  import_playbook: ../static-assignments/db.yaml
+# - name: import database file
+#   import_playbook: ../static-assignments/db.yaml
 
 - hosts: lb
 - name: Loadbalancers assignment
