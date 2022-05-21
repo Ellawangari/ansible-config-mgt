@@ -3,10 +3,21 @@
 
 [webservers]
 172.31.18.161  ansible_ssh_user='ec2-user'
-172.31.22.137  ansible_ssh_user='ec2-user'
+
+#172.31.22.137  ansible_ssh_user='ec2-user'
+
+
+[todo]
+<Todo-Web-Server-Private-IP-Address>
 
 [db]
 172.31.3.124   ansible_ssh_user='ubuntu' 
 
 [lb]
 172.31.29.150  ansible_ssh_user='ubuntu'
+
+
+
+
+
+
