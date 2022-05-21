@@ -1,14 +1,22 @@
 ---
-# tasks file for nginxRole
-- name: Install nginx
-  become: yes
+# tasks file for nginx
+- name: install nginx on the webserver
   ansible.builtin.yum:
-    name: nginx
-    state: present
+      name: nginx
+      state: present
 
-- name: Enable nginx
-  become: yes
+
+- name: ensure nginx is started and enabled
   ansible.builtin.service:
-    name: nginx
-    enabled: yes
+     name: nginx
+     state: started 
+     enabled: yes
 
+- name: install PHP
+  ansible.builtin.yum:
+    name:
+      - php 
+      - php-mysqlnd
+      - php-gd 
+      - php-curl
+    state: present
