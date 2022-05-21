@@ -1,0 +1,14 @@
+---
+# tasks file for nginxRole
+- name: Install nginx
+  become: yes
+  ansible.builtin.yum:
+    name: nginx
+    state: present
+
+- name: Enable nginx
+  become: yes
+  ansible.builtin.service:
+    name: nginx
+    enabled: yes
+
