@@ -6,9 +6,9 @@ pipeline {
     }
 
   parameters {
-      choice(choices: ['dev', 'sit'], name: 'environments',  description: 'This is the inventory file for the environment to deploy configuration')
+      choice(choices: ['dev', 'sit'], name: 'inventory',  description: 'This is the inventory file for the environment to deploy configuration')
     }
-inventory
+
   stages{
       stage("Initial cleanup") {
           steps {
