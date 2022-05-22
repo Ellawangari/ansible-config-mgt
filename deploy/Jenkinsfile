@@ -5,9 +5,9 @@ pipeline {
       ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
     }
 
-  parameters {
-      choice( name: 'inventory',choices: ['sit', 'dev'],  description: 'This is the inventory file for the environment to deploy configuration')
-    }
+  parameters: [
+    choice(choices: ['dev ', 'sit', 'uat'], description: 'This is the inventory file for the environment to deploy configuration', name: 'inventory')
+    ]
 
   stages{
       stage("Initial cleanup") {
