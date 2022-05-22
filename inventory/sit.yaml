@@ -1,5 +1,5 @@
-[sit-nginx]
+[nginx]
 172.31.18.43  ansible_ssh_user='ec2-user'
 
-[sit-db]
+[db]
 172.31.22.6  ansible_ssh_user='ubuntu'
