@@ -5,7 +5,7 @@ pipeline {
       ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
     }
 
-  parameters: 
+  parameters
   {
     choice(choices: ['sit','dev','uat'], description: 'This is the inventory file for the environment to deploy configuration', name: 'inventory')
     
@@ -30,19 +30,19 @@ pipeline {
           sh 'echo ${WORKSPACE}' 
           sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'  
         }
-     }
+       }
 
       stage('Run Ansible playbook') {
         steps {
-   ansiblePlaybook become: true, colorized: true, credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'Ansible2', inventory: 'inventory/${inventory}.yaml', playbook: 'playbooks/site.yaml'
+              ansiblePlaybook become: true, colorized: true, credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'Ansible2', inventory: 'inventory/${inventory}.yaml', playbook: 'playbooks/site.yaml'
          }
-      }
+        }
 
       stage('Clean Workspace after build'){
         steps{
           cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
         }
-      }
+        }
    }
 
 }
