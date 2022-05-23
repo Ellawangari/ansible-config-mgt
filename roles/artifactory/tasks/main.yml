@@ -5,7 +5,7 @@
   apt:
     name: gnupg2
     state: present
-    update_cache: no
+    update_cache: yesno
 
 - name: Download and add GPG Key
   become: yes
@@ -26,7 +26,7 @@
   apt:
     name: jfrog-artifactory-oss
     state: present
-    update_cache: no
+    update_cache: yes
 
 - name: Start and enable Artifactory service
   become: yes
