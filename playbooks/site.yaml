@@ -11,6 +11,7 @@
 - hosts: artifactory
 - name: artifactory assignment
   import_playbook: ../static-assignments/artifactory.yaml 
+  
 
 # - hosts: all
 # - name: Include dynamic variables 
