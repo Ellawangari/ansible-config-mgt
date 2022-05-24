@@ -1,0 +1,43 @@
+---
+# tasks file for artifactory
+- name: Install Gnupg2
+  become: yes
+  apt:
+    name: gnupg2
+    state: present
+    
+
+- name: Download and add GPG Key
+  become: yes
+  apt_key:
+    url: https://api.bintray.com/orgs/jfrog/keys/gpg/public.key
+    state: present
+
+- name: Add JFrog Artifactory repository
+  become: yes
+  lineinfile:
+    path: "/etc/apt/sources.list.d/jfrog.list"
+    line: "deb https://jfrog.bintray.com/artifactory-debs bionic main"
+    create: yes
+    state: present
+
+- name: Update Package
+  become: yes 
+  apt: 
+    update_cache: yes
+    force_apt_get: yes
+    cache_valid_time: 3600
+
+- name: Install JFrog
+  become: yes
+  apt:
+    name: jfrog-artifactory-oss
+    state: present
+    
+
+- name: Start and enable Artifactory service
+  become: yes
+  service:
+    name: artifactory
+    state: started
+    enabled: yes
