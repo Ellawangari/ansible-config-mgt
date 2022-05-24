@@ -1,16 +1,16 @@
 --- 
-# - hosts: db
-# - name: database assignment
-#   import_playbook: ../static-assignments/db.yaml
+ - hosts: db
+ - name: database assignment
+   import_playbook: ../static-assignments/db.yaml
 
 
 # - hosts: nginx
 # - name: nginx assignment
 #   import_playbook: ../static-assignments/nginx.yaml
 
-- hosts: artifactory
-- name: artifactory assignment
-  import_playbook: ../static-assignments/artifactory.yaml 
+#- hosts: artifactory
+#- name: artifactory assignment
+#  import_playbook: ../static-assignments/artifactory.yaml 
   
 
 # - hosts: all
