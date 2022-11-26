@@ -5,23 +5,22 @@ pipeline {
       ANSIBLE_CONFIG="${WORKSPACE}/deploy/ansible.cfg"
     }
 
- // parameters
- // {
-    // choice(choices: ['dev','sit','uat'], description: 'This is the inventory file for the environment to deploy configuration', name: 'inventory')
-  //   string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
- // }
-  //stages{
-      //stage("Initial cleanup") {
-          //steps {
-            //dir("${WORKSPACE}") {
-              //deleteDir()
-           // }
-          //}
-        //}
+  parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+    }
+
+  stages{
+      stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
+            }
+          }
+        }
 
       stage('Checkout SCM') {
          steps{
-            git branch: 'boma-branch', url: 'https://github.com/nbomasi/ansible-config-mgt.git'
+            git branch: 'boma-branch', url: 'https://github.com/nbomasi/ansible-config.git'
          }
        }
 
@@ -30,20 +29,20 @@ pipeline {
           sh 'echo ${WORKSPACE}' 
           sh 'sed -i "3 a roles_path=${WORKSPACE}/roles" ${WORKSPACE}/deploy/ansible.cfg'  
         }
-       }
+     }
 
       stage('Run Ansible playbook') {
         steps {
-              ansiblePlaybook colorized: true, credentialsId: 'mysql-server-key', disableHostKeyChecking: true, installation: 'myansible', inventory: 'inventory/dev.yaml', playbook: 'playbooks/site.yaml'
+           ansiblePlaybook become: true, colorized: true, credentialsId: 'mysql-server-key', disableHostKeyChecking: true, installation: 'myansible', inventory: 'inventory/dev.yaml', playbook: 'playbooks/site.yaml'
+           ansiblePlaybook become: true, colorized: true, credentialsId: 'nginx-server-key', disableHostKeyChecking: true, installation: 'myansible', inventory: 'inventory/dev.yam', playbook: 'playbooks/site.yaml'
          }
-        }
+      }
 
       stage('Clean Workspace after build'){
         steps{
           cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
         }
-        }
+      }
    }
 
-
-
+}
